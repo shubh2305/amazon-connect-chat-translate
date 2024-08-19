@@ -17,6 +17,7 @@ const Ccp = () => {
     const [currentContactId] = useGlobalState('currentContactId');
     const [languageOptions] = useGlobalState('languageOptions');
     const [agentChatSessionState, setAgentChatSessionState] = useState([]);
+    const [toLanguage, setToLanguage] = useState('en');
     const [setRefreshChild] = useState([]);
 
     console.log(lang)
@@ -214,7 +215,7 @@ const Ccp = () => {
             {/* CCP window will load here */}
             <div id="ccp-container"></div>
             {/* Translate window will laod here. We pass the agent state to be able to use this to push messages to CCP */}
-            <div id="chatroom" ><Chatroom session={agentChatSessionState}/> </div> 
+            <div id="chatroom" ><Chatroom session={agentChatSessionState} setToLanguage={setToLanguage}/> </div> 
             </Grid.Row>
           </Grid>
         </main>

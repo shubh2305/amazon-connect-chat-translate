@@ -5,6 +5,25 @@ import Message from './message.js';
 import translateTextAPI from './translateAPI'
 import { addChat, useGlobalState } from '../store/state';
 
+const LanguageDropdown = ({ setToLanguage, languageOptions }) => {
+    const handleChange = (event) => {
+      setToLanguage(event.target.value);
+    };
+  
+    return (
+        <div>
+            <label htmlFor="language-select">Select Language:</label>
+            <select id="language-select" onChange={handleChange}>
+            {Object.keys(languageOptions).map((lang) => (
+                <option key={languageOptions[lang]} value={languageOptions[lang]}>
+                {lang}
+                </option>
+            ))}
+            </select>
+        </div>
+    );
+};
+
 const Chatroom = (props) => {
 
     const [Chats] = useGlobalState('Chats');
@@ -107,29 +126,30 @@ const Chatroom = (props) => {
 
     return (
         <div className="chatroom">
-                <h3>Translate - ({languageTranslate.map(lang => {if(lang.contactId === currentContactId[0])return lang.lang})}) {getKeyByValue(languageOptions)}</h3>
-                <ul className="chats" ref={messageEl}>
-                {
-                        // iterate over the Chats, and only display the messages for the currently active chat session
-                        Chats.map(chat => {
-                            if(chat.contactId === currentContactId[0])
-                                return<Message chat={chat} user={agentUsername} />
-                            }
-                        )
-                    }
-                </ul>
-                <form className="input" onSubmit={handleSubmit} >
-                    <input
-                          ref={input}
-                          maxLength = "1024"
-                          type="text"
-                          value={newMessage}
-                          onChange={e => setNewMessage(e.target.value)}
-                        />
-                    <input type="submit" value="Submit" />
-                </form>
- 
-            </div>
+            < LanguageDropdown />
+            <h3>Translate - ({languageTranslate.map(lang => {if(lang.contactId === currentContactId[0])return lang.lang})}) {getKeyByValue(languageOptions)}</h3>
+            <ul className="chats" ref={messageEl}>
+            {
+                    // iterate over the Chats, and only display the messages for the currently active chat session
+                    Chats.map(chat => {
+                        if(chat.contactId === currentContactId[0])
+                            return<Message chat={chat} user={agentUsername} />
+                        }
+                    )
+                }
+            </ul>
+            <form className="input" onSubmit={handleSubmit} >
+                <input
+                        ref={input}
+                        maxLength = "1024"
+                        type="text"
+                        value={newMessage}
+                        onChange={e => setNewMessage(e.target.value)}
+                    />
+                <input type="submit" value="Submit" />
+            </form>
+
+        </div>
     );
 };
 
