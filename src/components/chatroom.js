@@ -7,6 +7,7 @@ import { addChat, useGlobalState } from '../store/state';
 
 const LanguageDropdown = ({ setToLanguage, languageOptions }) => {
     const handleChange = (event) => {
+        console.log(event.target);
       setToLanguage(event.target.value);
     };
   
@@ -126,7 +127,7 @@ const Chatroom = (props) => {
 
     return (
         <div className="chatroom">
-            < LanguageDropdown setToLanguage={props.setToLanguage} languageOptions={languageOptions} />
+            {/* < LanguageDropdown setToLanguage={props.setToLanguage} languageOptions={languageOptions} /> */}
             <h3>Translate - ({languageTranslate.map(lang => {if(lang.contactId === currentContactId[0])return lang.lang})}) {getKeyByValue(languageOptions)}</h3>
             <ul className="chats" ref={messageEl}>
             {
