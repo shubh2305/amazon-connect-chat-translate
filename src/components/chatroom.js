@@ -127,31 +127,32 @@ const Chatroom = (props) => {
 
 
     return (
-        <div className="chatroom">
+        <>
             < LanguageDropdown setToLanguage={props.setToLanguage} languageOptions={languageOptions} />
-            <h3>Translate - ({languageTranslate.map(lang => {if(lang.contactId === currentContactId[0])return lang.lang})}) {getKeyByValue(languageOptions)}</h3>
-            <ul className="chats" ref={messageEl}>
-            {
-                    // iterate over the Chats, and only display the messages for the currently active chat session
-                    Chats.map(chat => {
-                        if(chat.contactId === currentContactId[0])
-                            return<Message chat={chat} user={agentUsername} />
-                        }
-                    )
-                }
-            </ul>
-            <form className="input" onSubmit={handleSubmit} >
-                <input
-                        ref={input}
-                        maxLength = "1024"
-                        type="text"
-                        value={newMessage}
-                        onChange={e => setNewMessage(e.target.value)}
-                    />
-                <input type="submit" value="Submit" />
-            </form>
-
-        </div>
+            <div className="chatroom">
+                <h3>Translate - ({languageTranslate.map(lang => {if(lang.contactId === currentContactId[0])return lang.lang})}) {getKeyByValue(languageOptions)}</h3>
+                <ul className="chats" ref={messageEl}>
+                {
+                        // iterate over the Chats, and only display the messages for the currently active chat session
+                        Chats.map(chat => {
+                            if(chat.contactId === currentContactId[0])
+                                return<Message chat={chat} user={agentUsername} />
+                            }
+                        )
+                    }
+                </ul>
+                <form className="input" onSubmit={handleSubmit} >
+                    <input
+                            ref={input}
+                            maxLength = "1024"
+                            type="text"
+                            value={newMessage}
+                            onChange={e => setNewMessage(e.target.value)}
+                        />
+                    <input type="submit" value="Submit" />
+                </form>
+            </div>
+        </>
     );
 };
 
