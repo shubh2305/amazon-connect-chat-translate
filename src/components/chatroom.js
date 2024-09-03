@@ -7,7 +7,7 @@ import { addChat, useGlobalState } from '../store/state';
 
 const LanguageDropdown = ({ setToLanguage, languageOptions }) => {
     const handleChange = (event) => {
-        console.log(event.target);
+        console.log("LanguageDropdown", event.target.value);
       setToLanguage(event.target.value);
     };
   
