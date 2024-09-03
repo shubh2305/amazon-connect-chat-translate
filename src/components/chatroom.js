@@ -32,6 +32,7 @@ const Chatroom = (props) => {
     const [newMessage, setNewMessage] = useState("");
     const [languageTranslate] = useGlobalState('languageTranslate');
     const [languageOptions] = useGlobalState('languageOptions');
+    console.log("languageOptions", languageOptions);
     const agentUsername = 'AGENT';
     const messageEl = useRef(null);
     const input = useRef(null);
@@ -127,7 +128,7 @@ const Chatroom = (props) => {
 
     return (
         <div className="chatroom">
-            {/* < LanguageDropdown setToLanguage={props.setToLanguage} languageOptions={languageOptions} /> */}
+            < LanguageDropdown setToLanguage={props.setToLanguage} languageOptions={languageOptions} />
             <h3>Translate - ({languageTranslate.map(lang => {if(lang.contactId === currentContactId[0])return lang.lang})}) {getKeyByValue(languageOptions)}</h3>
             <ul className="chats" ref={messageEl}>
             {
