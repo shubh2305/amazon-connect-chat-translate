@@ -215,7 +215,7 @@ const Ccp = () => {
             {/* CCP window will load here */}
             <div id="ccp-container"></div>
             {/* Translate window will laod here. We pass the agent state to be able to use this to push messages to CCP */}
-            <div id="chatroom" ><Chatroom session={agentChatSessionState} setToLanguage={setToLanguage}/> </div> 
+            <div id="chatroom" ><Chatroom session={agentChatSessionState} setToLanguage={setToLanguage} toLanguage={toLanguage}/> </div> 
             </Grid.Row>
           </Grid>
         </main>
