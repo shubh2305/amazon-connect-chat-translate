@@ -204,16 +204,18 @@ const Ccp = () => {
                 } 
             }
         );
-        subscribeConnectEvents();
+        // subscribeConnectEvents();
     }, []);
 
-    useEffect(() => {
+    const onClickButton = () =>{
         console.log(`useEffect called toLanguage updated ${toLanguage}`)
         subscribeConnectEvents();
-    }, [toLanguage]);
+    };
 
     return (
         <main>
+          <h3 style={{ color: 'white' }}> Selected Agent's language is {toLanguage} </h3>
+          <button onClick={onClickButton}> Select Language</button>
           <Grid columns='equal' stackable padded>
           <Grid.Row>
             {/* CCP window will load here */}

@@ -7,23 +7,48 @@ import { addChat, useGlobalState } from '../store/state';
 
 const LanguageDropdown = ({ setToLanguage, languageOptions }) => {
     const handleChange = (event) => {
-        console.log("LanguageDropdown", event.target.value);
+      console.log("LanguageDropdown", event.target.value);
       setToLanguage(event.target.value);
     };
   
     return (
-        <div>
-            <label htmlFor="language-select">Select Language:</label>
-            <select id="language-select" onChange={handleChange}>
-            {Object.keys(languageOptions).map((lang) => (
-                <option key={languageOptions[lang]} value={languageOptions[lang]}>
-                {lang}
-                </option>
-            ))}
-            </select>
-        </div>
+      <div style={styles.container}>
+        <label htmlFor="language-select" style={styles.label}>
+          Select Language:
+        </label>
+        <select id="language-select" onChange={handleChange} style={styles.select}>
+          {Object.keys(languageOptions).map((lang) => (
+            <option key={languageOptions[lang]} value={languageOptions[lang]}>
+              {lang}
+            </option>
+          ))}
+        </select>
+      </div>
     );
-};
+  };
+  
+  // Styling for a black background page
+  const styles = {
+    container: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      marginBottom: '16px',
+    },
+    label: {
+      marginBottom: '8px',
+      fontWeight: 'bold',
+      color: '#FFFFFF', // White text color for the label
+    },
+    select: {
+      padding: '10px',
+      fontSize: '16px',
+      borderRadius: '4px',
+      border: '1px solid #555', // Slightly lighter border for contrast
+      backgroundColor: '#333', // Dark background for the dropdown
+      color: '#FFFFFF', // White text color for the dropdown
+    },
+  };
 
 const Chatroom = (props) => {
 
