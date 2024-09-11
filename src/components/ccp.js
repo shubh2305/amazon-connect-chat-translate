@@ -262,7 +262,7 @@ const Ccp = () => {
     return (
         <main>
           <h3 style={{ color: 'white' }}> Selected Agent's language is {languageSelected? toLanguage:''} </h3>
-          <button onClick={onClickButton} disabled={!languageSelected}> Select Language</button>
+          <button onClick={onClickButton} disabled={languageSelected}> Select Language</button>
           < LanguageDropdown setToLanguage={props.setToLanguage} languageOptions={languageOptions} />
           <Grid columns='equal' stackable padded>
           <Grid.Row>
