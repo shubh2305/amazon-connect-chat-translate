@@ -9,6 +9,51 @@ import { addChat, setLanguageTranslate, clearChat, useGlobalState, setCurrentCon
 
 Amplify.configure(awsconfig);
 
+const LanguageDropdown = ({ setToLanguage, languageOptions }) => {
+    const handleChange = (event) => {
+      console.log("LanguageDropdown", event.target.value);
+      setToLanguage(event.target.value);
+    };
+  
+    return (
+      <div style={styles.container}>
+        <label htmlFor="language-select" style={styles.label}>
+          Select Language:
+        </label>
+        <select id="language-select" onChange={handleChange} style={styles.select}>
+          {Object.keys(languageOptions).map((lang) => (
+            <option key={languageOptions[lang]} value={languageOptions[lang]}>
+              {lang}
+            </option>
+          ))}
+        </select>
+      </div>
+    );
+  };
+  
+  // Styling for a black background page
+  const styles = {
+    container: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      marginBottom: '16px',
+    },
+    label: {
+      marginBottom: '8px',
+      fontWeight: 'bold',
+      color: '#FFFFFF', // White text color for the label
+    },
+    select: {
+      padding: '10px',
+      fontSize: '16px',
+      borderRadius: '4px',
+      border: '1px solid #555', // Slightly lighter border for contrast
+      backgroundColor: '#333', // Dark background for the dropdown
+      color: '#FFFFFF', // White text color for the dropdown
+    },
+  };
+
 const Ccp = () => {
     const [languageTranslate] = useGlobalState('languageTranslate');
     var localLanguageTranslate = [];
@@ -17,8 +62,9 @@ const Ccp = () => {
     const [currentContactId] = useGlobalState('currentContactId');
     const [languageOptions] = useGlobalState('languageOptions');
     const [agentChatSessionState, setAgentChatSessionState] = useState([]);
-    const [toLanguage, setToLanguage] = useState('');
+    const [toLanguage, setToLanguage] = useState('en');
     const [setRefreshChild] = useState([]);
+    const [languageSelected, setLanguageSelected] = useState(false);
 
     console.log(lang)
     console.log(currentContactId)
@@ -207,15 +253,17 @@ const Ccp = () => {
         // subscribeConnectEvents();
     }, []);
 
-    const onClickButton = () =>{
+    const onClickButton = (event) =>{
         console.log(`useEffect called toLanguage updated ${toLanguage}`)
+        setLanguageSelected(true);
         subscribeConnectEvents();
     };
 
     return (
         <main>
-          <h3 style={{ color: 'white' }}> Selected Agent's language is {toLanguage} </h3>
-          <button onClick={onClickButton}> Select Language</button>
+          <h3 style={{ color: 'white' }}> Selected Agent's language is {languageSelected? toLanguage:''} </h3>
+          <button onClick={onClickButton} disabled={!languageSelected}> Select Language</button>
+          < LanguageDropdown setToLanguage={props.setToLanguage} languageOptions={languageOptions} />
           <Grid columns='equal' stackable padded>
           <Grid.Row>
             {/* CCP window will load here */}
