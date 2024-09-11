@@ -253,7 +253,7 @@ const Ccp = () => {
         // subscribeConnectEvents();
     }, []);
 
-    const onClickButton = (event) =>{
+    const onClickButton = () =>{
         console.log(`useEffect called toLanguage updated ${toLanguage}`)
         setLanguageSelected(true);
         subscribeConnectEvents();
@@ -263,13 +263,13 @@ const Ccp = () => {
         <main>
           <h3 style={{ color: 'white' }}> Selected Agent's language is {languageSelected? toLanguage:''} </h3>
           <button onClick={onClickButton} disabled={languageSelected}> Select Language</button>
-          < LanguageDropdown setToLanguage={props.setToLanguage} languageOptions={languageOptions} />
+          < LanguageDropdown setToLanguage={setToLanguage} languageOptions={languageOptions} />
           <Grid columns='equal' stackable padded>
           <Grid.Row>
             {/* CCP window will load here */}
             <div id="ccp-container"></div>
             {/* Translate window will laod here. We pass the agent state to be able to use this to push messages to CCP */}
-            <div id="chatroom" ><Chatroom session={agentChatSessionState} setToLanguage={setToLanguage} toLanguage={toLanguage}/> </div> 
+            <div id="chatroom" ><Chatroom session={agentChatSessionState} toLanguage={toLanguage}/> </div> 
             </Grid.Row>
           </Grid>
         </main>
