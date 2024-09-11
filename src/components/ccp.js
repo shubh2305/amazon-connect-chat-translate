@@ -205,7 +205,7 @@ const Ccp = () => {
             }
         );
         subscribeConnectEvents();
-    }, []);
+    }, [toLanguage]);
 
 
     return (
