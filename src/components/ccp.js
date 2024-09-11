@@ -17,7 +17,7 @@ const Ccp = () => {
     const [currentContactId] = useGlobalState('currentContactId');
     const [languageOptions] = useGlobalState('languageOptions');
     const [agentChatSessionState, setAgentChatSessionState] = useState([]);
-    const [toLanguage, setToLanguage] = useState('en');
+    const [toLanguage, setToLanguage] = useState('');
     const [setRefreshChild] = useState([]);
 
     console.log(lang)
