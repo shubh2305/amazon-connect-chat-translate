@@ -205,8 +205,12 @@ const Ccp = () => {
             }
         );
         subscribeConnectEvents();
-    }, [toLanguage]);
+    }, []);
 
+    useEffect(() => {
+        console.log(`useEffect called toLanguage updated ${toLanguage}`)
+        subscribeConnectEvents();
+    }, [toLanguage]);
 
     return (
         <main>
