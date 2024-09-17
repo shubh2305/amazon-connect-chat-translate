@@ -9,7 +9,7 @@ import { addChat, setLanguageTranslate, clearChat, useGlobalState, setCurrentCon
 
 Amplify.configure(awsconfig);
 
-const LanguageDropdown = ({ setToLanguage, languageOptions }) => {
+const LanguageDropdown = ({ setToLanguage, languageOptions, disabled }) => {
     const handleChange = (event) => {
       console.log("LanguageDropdown", event.target.value);
       setToLanguage(event.target.value);
@@ -18,9 +18,9 @@ const LanguageDropdown = ({ setToLanguage, languageOptions }) => {
     return (
       <div style={styles.container}>
         <label htmlFor="language-select" style={styles.label}>
-          Select Language:
+          Choose Language:
         </label>
-        <select id="language-select" onChange={handleChange} style={styles.select}>
+        <select id="language-select" onChange={handleChange} style={styles.select} disabled={disabled}>
           {Object.keys(languageOptions).map((lang) => (
             <option key={languageOptions[lang]} value={languageOptions[lang]}>
               {lang}
@@ -261,9 +261,12 @@ const Ccp = () => {
 
     return (
         <main>
-          <h3 style={{ color: 'white' }}> Selected Agent's language is {languageSelected? toLanguage:''} </h3>
-          <button onClick={onClickButton} disabled={languageSelected}> Select Language</button>
-          < LanguageDropdown setToLanguage={setToLanguage} languageOptions={languageOptions} />
+          <h3 style={{ color: 'white' }}> Selected Agent's language is:- {languageSelected? toLanguage:''} </h3>
+          <div style={{display: 'flex'}}>
+            < LanguageDropdown setToLanguage={setToLanguage} languageOptions={languageOptions} disabled={languageSelected} style={{margin: '15px'}}/>
+            <button onClick={onClickButton} disabled={languageSelected}> Select Language</button>
+          </div>
+          
           <Grid columns='equal' stackable padded>
           <Grid.Row>
             {/* CCP window will load here */}
