@@ -264,7 +264,22 @@ const Ccp = () => {
           <h3 style={{ color: 'white' }}> Selected Agent's language is:- {languageSelected? toLanguage:''} </h3>
           <div style={{display: 'flex'}}>
             < LanguageDropdown setToLanguage={setToLanguage} languageOptions={languageOptions} disabled={languageSelected} style={{margin: '15px'}}/>
-            <button onClick={onClickButton} disabled={languageSelected}> Select Language</button>
+            <button
+              onClick={onClickButton}
+              disabled={languageSelected}
+              style={{
+                backgroundColor: languageSelected ? '#ccc' : '#4CAF50',  // Gray if disabled, Green otherwise
+                color: 'white',
+                padding: '10px 20px',
+                border: 'none',
+                borderRadius: '5px',
+                cursor: languageSelected ? 'not-allowed' : 'pointer',
+                fontSize: '16px',
+                transition: 'background-color 0.3s ease',
+              }}
+            >
+              {languageSelected ? 'Language Selected' : 'Select Language'}
+            </button>
           </div>
           
           <Grid columns='equal' stackable padded>
