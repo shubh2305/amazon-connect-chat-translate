@@ -38,6 +38,7 @@ const LanguageDropdown = ({ setToLanguage, languageOptions, disabled }) => {
       flexDirection: 'column',
       alignItems: 'flex-start',
       marginBottom: '16px',
+      marginRight: '16px',
     },
     label: {
       marginBottom: '8px',
@@ -262,7 +263,7 @@ const Ccp = () => {
     return (
         <main>
           <h3 style={{ color: 'white' }}> Selected Agent's language is:- {languageSelected? toLanguage:''} </h3>
-          <div style={{display: 'flex'}}>
+          <div style={{display: 'flex', alignItems:'center'}}>
             < LanguageDropdown setToLanguage={setToLanguage} languageOptions={languageOptions} disabled={languageSelected} style={{margin: '15px'}}/>
             <button
               onClick={onClickButton}
