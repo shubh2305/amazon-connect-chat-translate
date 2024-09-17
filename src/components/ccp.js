@@ -273,6 +273,7 @@ const Ccp = () => {
                 padding: '10px 20px',
                 border: 'none',
                 borderRadius: '5px',
+                maxHeight: '50px',
                 cursor: languageSelected ? 'not-allowed' : 'pointer',
                 fontSize: '16px',
                 transition: 'background-color 0.3s ease',
