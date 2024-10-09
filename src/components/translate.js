@@ -1,8 +1,23 @@
 import  { Predictions} from '@aws-amplify/predictions';
 import { TranslateClient, TranslateTextCommand } from "@aws-sdk/client-translate";
+import { getAmplifyUserAgentObject, Category, PredictionsAction, Signer } from '@aws-amplify/core/internals/utils';
+import { ConsoleLogger, Amplify, fetchAuthSession } from '@aws-amplify/core';
+
 
 const translateText = async (text, sourceLang, targetLang) => {
-    const client = new TranslateClient();
+
+
+    const { translateT = {} } = Amplify.getConfig().Predictions?.convert ?? {};
+    const { defaults = {}, region } = translateT;
+    const { credentials } = await fetchAuthSession();
+    const client = new TranslateClient({
+        region,
+        credentials,
+        customUserAgent: getAmplifyUserAgentObject({
+            category: Category.Predictions,
+            action: PredictionsAction.Convert,
+        }),
+    });
     const params = {
         Text: text,
         SourceLanguageCode: sourceLang,
@@ -17,7 +32,7 @@ const translateText = async (text, sourceLang, targetLang) => {
         return response.TranslatedText;
     } catch (error) {
         console.error("Translation error: ", error);
-        throw error;
+        // throw error;
     }
 };
 
