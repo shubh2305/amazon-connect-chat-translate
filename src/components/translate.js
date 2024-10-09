@@ -11,12 +11,7 @@ const translateText = async (text, sourceLang, targetLang) => {
     const { defaults = {}, region } = translateT;
     const { credentials } = await fetchAuthSession();
     const client = new TranslateClient({
-        region,
-        credentials,
-        customUserAgent: getAmplifyUserAgentObject({
-            category: Category.Predictions,
-            action: PredictionsAction.Convert,
-        }),
+        region: 'eu-west-2',
     });
     const params = {
         Text: text,
