@@ -8,6 +8,7 @@
 		"@aws-amplify/predictions": "^6.0.23",
 		"@aws-amplify/storage": "6.0.23",
 		"@aws-amplify/ui-react": "^6.1.6",
+		"@aws-sdk/client-translate": "^3.666.0",
 		"@babel/core": "7.24.3",
 		"@babel/plugin-syntax-flow": "^7.24.1",
 		"@babel/plugin-transform-react-jsx": "^7.23.4",

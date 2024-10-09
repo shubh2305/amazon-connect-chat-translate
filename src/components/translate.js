@@ -1,6 +1,25 @@
 import  { Predictions} from '@aws-amplify/predictions';
+import { TranslateClient, TranslateTextCommand } from "@aws-sdk/client-translate";
 
-
+const translateText = async (text, sourceLang, targetLang) => {
+    const client = new TranslateClient();
+    const params = {
+        Text: text,
+        SourceLanguageCode: sourceLang,
+        TargetLanguageCode: targetLang,
+        Settings: {
+            Formality: "FORMAL",
+        },
+    };
+    try {
+        const command = new TranslateTextCommand(params);
+        const response = await client.send(command);
+        return response.TranslatedText;
+    } catch (error) {
+        console.error("Translation error: ", error);
+        throw error;
+    }
+};
 
 async function ProcessChatText(content, sourceLang, tagretLang) {
 
@@ -14,6 +33,8 @@ async function ProcessChatText(content, sourceLang, tagretLang) {
             targetLanguage: tagretLang
         }
     });
+    const translatedMessage = await translateText(content, sourceLang, tagretLang)
+    console.log("TJ Translation: ", translatedMessage);
     return transcriptMessage.text
 }
 export default ProcessChatText
