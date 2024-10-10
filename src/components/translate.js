@@ -10,6 +10,7 @@ const translateText = async (text, sourceLang, targetLang) => {
     const { translateT = {} } = Amplify.getConfig().Predictions?.convert ?? {};
     const { defaults = {}, region } = translateT;
     const { credentials } = await fetchAuthSession();
+    console.log("TJ translateText", region);
     const client = new TranslateClient({
         region: 'eu-west-2',
     });
@@ -44,7 +45,7 @@ async function ProcessChatText(content, sourceLang, tagretLang) {
         }
     });
     const translatedMessage = await translateText(content, sourceLang, tagretLang)
-    console.log("TJ Translation: ", translatedMessage);
+    console.log("TJ Translation: ", translatedMessage, transcriptMessage.text);
     return transcriptMessage.text
 }
 export default ProcessChatText
