@@ -66,6 +66,7 @@ const Ccp = () => {
     const [toLanguage, setToLanguage] = useState('en');
     const [setRefreshChild] = useState([]);
     const [languageSelected, setLanguageSelected] = useState(false);
+    const [locale, setLocale] = useState("");
 
     console.log(lang)
     console.log(currentContactId)
@@ -104,8 +105,8 @@ const Ccp = () => {
         }
         // If the contatId was not found in the store, or the store is empty, perform dectText API to comprehend
         if (localLanguageTranslate.length === 0 || textLang === ''){
-            let tempLang = await detectText(content);
-            textLang = tempLang.textInterpretation.language
+            // let tempLang = await detectText(content);
+            textLang = locale;
         }
 
 
@@ -154,6 +155,7 @@ const Ccp = () => {
                     console.log("CDEBUG ===> onConnecting() >> contactId: ", contact.contactId);
                     let contactAttributes = contact.getAttributes();
                     console.log("CDEBUG ===> contactAttributes: ", JSON.stringify(contactAttributes));
+                    setLocale(contactAttributes.locale.value);
                     let contactQueue = contact.getQueue();
                     console.log("CDEBUG ===> contactQueue: ", contactQueue);
                 });
